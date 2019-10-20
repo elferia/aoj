@@ -15,13 +15,12 @@ def ith_amount_min_coin_count(i: int, current_amount: int) -> int:
         return without_ith_count
 
     return min(
-        without_ith_count, _min_coin_count[current_amount - ith_value] + 1)
+        without_ith_count, min_coin_count[current_amount - ith_value] + 1)
 
 
 for i in range(1, len(coin_kinds)):
-    _min_coin_count = [0]
     for current_amount in range(1, amount + 1):
-        _min_coin_count.append(ith_amount_min_coin_count(i, current_amount))
-    min_coin_count = _min_coin_count
+        min_coin_count[current_amount] = ith_amount_min_coin_count(
+            i, current_amount)
 
 print(min_coin_count[amount])
