@@ -41,6 +41,8 @@ class Node:
         self.point = None
         self.left = []
         self.right = []
+        self.min0 = None
+        self.max0 = None
 
     def search(self, query: Query) -> Tuple[int, List['Node']]:
         if not self.point:
@@ -48,6 +50,9 @@ class Node:
 
         p0 = self.point[self.axis_index]
         s0, t0 = query[self.axis_index]
+
+        if t0 < self.min0 or self.max0 < s0:
+            return -1, []
 
         if t0 < p0:
             return -1, self.left
@@ -64,6 +69,8 @@ class Node:
     def _setup(self) -> None:
         self.points.sort(key=itemgetter(self.axis_index))
         axis_values = [p[self.axis_index] for p in self.points]
+        self.min0 = axis_values[0]
+        self.max0 = axis_values[-1]
         median_index = len(self.points) // 2
         median_index = bisect_left(
             axis_values, axis_values[median_index], hi=median_index + 1)
