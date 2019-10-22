@@ -18,7 +18,10 @@ def update(value: int) -> None:
             values.pop(i)
             incre_s_lens.pop(i)
 
-    if pos < len(values) and value == values[pos]:
+    if pos == len(values):
+        values.append(value)
+        incre_s_lens.append(incre_s_len)
+    elif value == values[pos]:
         if incre_s_len > incre_s_lens[pos]:
             incre_s_lens[pos] = incre_s_len
             for i in range(len(incre_s_lens) - 1, pos, -1):
