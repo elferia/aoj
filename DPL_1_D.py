@@ -11,7 +11,7 @@ incre_s_lens = []
 
 def update(value: int) -> None:
     pos = bisect_left(values, value)
-    incre_s_len = max(islice(incre_s_lens, pos), default=0) + 1
+    incre_s_len = (incre_s_lens[pos - 1] if pos else 0) + 1
 
     def remove_elem(i: int) -> None:
         if incre_s_lens[i] == incre_s_len:
@@ -34,4 +34,4 @@ def update(value: int) -> None:
 for i in array:
     update(i)
 
-print(max(incre_s_lens))
+print(incre_s_lens[-1])
