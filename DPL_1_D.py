@@ -11,7 +11,7 @@ incre_s_lens = []
 
 def update(value: int) -> None:
     pos = bisect_left(values, value)
-    incre_s_len = max(incre_s_lens[:pos], default=0) + 1
+    incre_s_len = max(islice(incre_s_lens, pos), default=0) + 1
     if pos < len(values) and value == values[pos]:
         if incre_s_len > incre_s_lens[pos]:
             incre_s_lens[pos] = incre_s_len
